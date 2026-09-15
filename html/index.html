@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vanilla</title>
+        <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    <body>
+        <div class="ServerSelector">
+            <button class="ServerButton"><i data-lucide="message-circle"></i></button>
+            <hr class="DMServerSeperator">
+            <button class="ServerButon"><img src="../assets/Placeholder Server Logo.png" alt="Placeholder Server Logo"></button>
+        </div>
+        <div class="ChannelSelector">
+            <div class="ServerInformation">
+                <p>ServerName</p>
+                <div class="ServerInformationButtons">
+                    <button title="Copy server invite link." class="ServerInformationButton"><i data-lucide="share-2"></i></button>
+                    <button title="Manage profile for this server." class="ServerInformationButton"><i data-lucide="cog"></i></button>
+                    <button title="Server configuration dropdown" class="ServerInformationButton" data-permsRequired="ManageServer"><i data-lucide="chevron-down"></i></button>
+                </div>
+                <img src="../assets/Placeholder Server Banner.png" alt="Placeholder Server Banner">
+            </div>
+            <button class="SystemChannelButton"><p class="ChannelName"><i data-lucide="user-round-pen"></i>Channels & Roles</p></button>
+            <hr class="ChannelSeperator">
+            <button class="ChannelButton"><p class="ChannelName"><i data-lucide="book-bookmark"></i>Rules Not Categorized</p></button>
+            <button class="ChannelButton"><p class="ChannelName"><i data-lucide="megaphone"></i>Announcements Not Categorized</p></button>
+            <button class="ChannelButton"><p class="ChannelName"><i data-lucide="hash"></i>General Not Categorized</p></button>
+            <button class="ChannelButton"><p class="ChannelName"><i data-lucide="volume-2"></i>VC Not Categorized</p></button>
+
+            <details class="ChannelCategory">
+                <summary class="ChannelCategoryName">Category</summary>
+                    <button class="ChannelButton"><p class="ChannelName"><i data-lucide="book-bookmark"></i>Rules Categorized</p></button>
+                    <button class="ChannelButton"><p class="ChannelName"><i data-lucide="megaphone"></i>Announcements Categorized</p></button>
+                    <button class="ChannelButton"><p class="ChannelName"><i data-lucide="hash"></i>General Categorized</p></button>
+            </details>
+            <details class="ChannelCategory">
+                <summary class="ChannelCategoryName">Category 2</summary>
+                    <button class="ChannelButton"><p class="ChannelName"><i data-lucide="volume-2"></i>VC Categorized</p></button>
+            </details>
+        </div>
+        <div class="ChatView">
+            <div class="ChannelInformation">
+                <i data-lucide="book-bookmark"></i>
+                <p>Rules Not Categorized</p>
+                <p>Channel Description</p>
+            </div>
+        </div>
+    </body>
+</html>
