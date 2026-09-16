@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vanilla - Direct Messages</title>
+        <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    <body>
+        <!-- Server Selector -->
+        <div class="ServerList">
+            <button class="ServerButton ServerButton--active"><i data-lucide="message-circle"></i></button>
+            <hr class="ServerSeparator">
+            <button class="ServerButton"><img src="../assets/Placeholder Server Logo.png" alt="Placeholder Server Logo"></button>
+        </div>
+
+        <!-- DM Sidebar -->
+        <div class="ChannelList">
+            <div class="DMHeader">
+                <p class="SectionName">Direct Messages</p>
+            </div>
+
+            <div class="ChannelScrollArea">
+                <!-- Active within 12h: Shows last message -->
+                <button class="DMButton DMButton--active">
+                    <div class="DMAvatar">
+                        <img class="DMPFP" src="../assets/Placeholder User Profile Picture.png" alt="User Profile Picture">
+                        <span class="MemberStatus MemberStatus--online"></span>
+                    </div>
+                    <div class="DMInfo">
+                        <span class="DMUsername">AnotherUser</span>
+                        <span class="DMLastMessage">Hey! Let me know when you're free.</span>
+                    </div>
+                </button>
+
+                <!-- Inactive > 12h: Displays Thought Bubble beside PFP -->
+                <button class="DMButton">
+                    <div class="DMAvatar">
+                        <img class="DMPFP" src="../assets/Placeholder User Profile Picture.png" alt="User Profile Picture">
+                        <span class="MemberStatus MemberStatus--dnd"></span>
+                    </div>
+                    <div class="DMInfo">
+                        <span class="DMUsername">RepliedUser</span>
+                        <div class="ThoughtBubble ThoughtBubble--dm">
+                            <i data-lucide="cloud"></i>
+                            <span>Thinking about code... 💻</span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+
+            <!-- User Account Pill -->
+            <div class="UserAccountPill">
+                <div class="UserAvatar">
+                    <img class="UserPFP" src="../assets/Placeholder User Profile Picture.png" alt="User Profile Picture">
+                    <span class="UserStatus MemberStatus--online"></span>
+                </div>
+                <div class="UserInfo">
+                    <span class="Username">Username</span>
+                    <span class="UserCustomStatus">Online</span>
+                </div>
+                <div class="UserControls">
+                    <button class="UserControlButton" title="Mute"><i data-lucide="mic"></i></button>
+                    <button class="UserControlButton" title="Deafen"><i data-lucide="headphones"></i></button>
+                    <button class="UserControlButton" title="User Settings"><i data-lucide="settings"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat View -->
+        <div class="ChatView">
+            <div class="ChannelHeader">
+                <i class="ChannelIcon" data-lucide="at-sign"></i>
+                <p class="ChannelTitle">AnotherUser</p>
+                <span class="MemberStatus MemberStatus--online inline-status"></span>
+            </div>
+
+            <div class="MessagesView">
+                <div class="MessagesContainer">
+                    <div class="MessageGroup">
+                        <div class="Message">
+                            <div class="MessageMain">
+                                <img class="SenderPFP" src="../assets/Placeholder User Profile Picture.png" alt="Placeholder Profile Picture">
+                                <div class="MessageContent">
+                                    <p class="MessageInfo"><span class="SenderName">AnotherUser</span> <span class="SentTime">24:00</span></p>
+                                    <p class="MessageText">Hey! Let me know when you're free. 😊</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ChatBar">
+                <button class="ChatBarButton"><i data-lucide="plus"></i></button>
+                <input class="ChatInput" type="text" placeholder="Message @AnotherUser">
+                <button class="ChatBarButton"><i data-lucide="smile"></i></button>
+                <button class="ChatBarButton"><i data-lucide="sticker"></i></button>
+                <button class="ChatBarButton"><i data-lucide="send"></i></button>
+            </div>
+        </div>
+
+        <!-- DM Profile Panel -->
+        <div class="MemberList DMProfilePanel">
+            <div class="ProfileHeader">
+                <div class="ProfileBanner"></div>
+                <div class="ProfileAvatarContainer">
+                    <img class="ProfilePFP" src="../assets/Placeholder User Profile Picture.png" alt="User Profile Picture">
+                    <span class="MemberStatus MemberStatus--online ProfileStatus"></span>
+                    
+                    <!-- Profile Panel Thought Bubble attached directly to Avatar -->
+                    <div class="ThoughtBubble ThoughtBubble--profile">
+                        <i data-lucide="cloud"></i>
+                        <span>Designing cool UI components 🎨</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ProfileBody">
+                <p class="ProfileDisplayName">AnotherUser</p>
+                <p class="ProfileUsername">another_user</p>
+
+                <hr class="ChannelSeparator">
+                <p class="ProfileSectionTitle">About Me</p>
+                <p class="ProfileBio">Hey there! I am using Vanilla. ✨</p>
+            </div>
+        </div>
+
+        <!-- Lucide Loader Script -->
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <script>
+            lucide.createIcons();
+        </script>
+
+        <!-- Twemoji Script Integration -->
+        <script src="https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+        <script>
+            twemoji.parse(document.body);
+        </script>
+    </body>
+</html>

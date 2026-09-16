@@ -1,49 +1,313 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Vanilla</title>
         <link rel="stylesheet" href="../css/styles.css">
     </head>
     <body>
-        <div class="ServerSelector">
+        <!-- Server Selector -->
+        <div class="ServerList">
             <button class="ServerButton"><i data-lucide="message-circle"></i></button>
-            <hr class="DMServerSeperator">
-            <button class="ServerButon"><img src="../assets/Placeholder Server Logo.png" alt="Placeholder Server Logo"></button>
+            <hr class="ServerSeparator">
+            <button class="ServerButton"><img src="../assets/Placeholder Server Logo.png" alt="Placeholder Server Logo"></button>
         </div>
-        <div class="ChannelSelector">
-            <div class="ServerInformation">
-                <p>ServerName</p>
-                <div class="ServerInformationButtons">
-                    <button title="Copy server invite link." class="ServerInformationButton"><i data-lucide="share-2"></i></button>
-                    <button title="Manage profile for this server." class="ServerInformationButton"><i data-lucide="cog"></i></button>
-                    <button title="Server configuration dropdown" class="ServerInformationButton" data-permsRequired="ManageServer"><i data-lucide="chevron-down"></i></button>
-                </div>
-                <img src="../assets/Placeholder Server Banner.png" alt="Placeholder Server Banner">
-            </div>
-            <button class="SystemChannelButton"><p class="ChannelName"><i data-lucide="user-round-pen"></i>Channels & Roles</p></button>
-            <hr class="ChannelSeperator">
-            <button class="ChannelButton"><p class="ChannelName"><i data-lucide="book-bookmark"></i>Rules Not Categorized</p></button>
-            <button class="ChannelButton"><p class="ChannelName"><i data-lucide="megaphone"></i>Announcements Not Categorized</p></button>
-            <button class="ChannelButton"><p class="ChannelName"><i data-lucide="hash"></i>General Not Categorized</p></button>
-            <button class="ChannelButton"><p class="ChannelName"><i data-lucide="volume-2"></i>VC Not Categorized</p></button>
 
-            <details class="ChannelCategory">
-                <summary class="ChannelCategoryName">Category</summary>
-                    <button class="ChannelButton"><p class="ChannelName"><i data-lucide="book-bookmark"></i>Rules Categorized</p></button>
-                    <button class="ChannelButton"><p class="ChannelName"><i data-lucide="megaphone"></i>Announcements Categorized</p></button>
-                    <button class="ChannelButton"><p class="ChannelName"><i data-lucide="hash"></i>General Categorized</p></button>
-            </details>
-            <details class="ChannelCategory">
-                <summary class="ChannelCategoryName">Category 2</summary>
-                    <button class="ChannelButton"><p class="ChannelName"><i data-lucide="volume-2"></i>VC Categorized</p></button>
-            </details>
-        </div>
-        <div class="ChatView">
-            <div class="ChannelInformation">
-                <i data-lucide="book-bookmark"></i>
-                <p>Rules Not Categorized</p>
-                <p>Channel Description</p>
+        <!-- Channel Selector -->
+        <div class="ChannelList">
+            <div class="ServerHeader">
+                <img class="ServerBanner" src="../assets/Placeholder Server Banner.png" alt="Placeholder Server Banner">
+                <div class="ServerHeaderContent">
+                    <p class="ServerName">ServerName</p>
+                    <div class="ServerActions">
+                        <button title="Copy server invite link." class="ActionButton"><i data-lucide="share-2"></i></button>
+                        <button title="Manage profile for this server." class="ActionButton"><i data-lucide="cog"></i></button>
+                        <button id="serverMenuBtn" title="Server configuration dropdown" class="ActionButton" data-permsRequired="ManageServer"><i data-lucide="chevron-down"></i></button>
+
+                        <!-- Server Dropdown Menu -->
+                        <div id="serverMenuDropdown" class="ServerMenuDropdown">
+                            <button class="ServerMenuItem">
+                                <div class="ServerMenuContent">
+                                    <i data-lucide="gem"></i>
+                                    <span class="ServerMenuLabel">Server Boost</span>
+                                </div>
+                            </button>
+
+                            <button class="ServerMenuItem">
+                                <div class="ServerMenuContent">
+                                    <div class="ServerTagBadge">
+                                        <i data-lucide="moon"></i>
+                                        <span>VRTX</span>
+                                    </div>
+                                    <span class="ServerMenuLabel">Server Tag</span>
+                                </div>
+                            </button>
+
+                            <hr class="MenuSeparator">
+
+                            <button class="ServerMenuItem">
+                                <div class="ServerMenuContent">
+                                    <i data-lucide="user-plus"></i>
+                                    <span class="ServerMenuLabel">Invite to Server</span>
+                                </div>
+                            </button>
+
+                            <button class="ServerMenuItem">
+                                <div class="ServerMenuContent">
+                                    <i data-lucide="layout-grid"></i>
+                                    <span class="ServerMenuLabel">App Directory</span>
+                                </div>
+                            </button>
+
+                            <hr class="MenuSeparator">
+
+                            <button class="ServerMenuItem">
+                                <div class="ServerMenuContent">
+                                    <i data-lucide="eye"></i>
+                                    <span class="ServerMenuLabel">Show All Channels</span>
+                                </div>
+                                <div class="MenuCheckbox MenuCheckbox--checked">
+                                    <i data-lucide="check"></i>
+                                </div>
+                            </button>
+
+                            <button class="ServerMenuItem">
+                                <div class="ServerMenuContent">
+                                    <i data-lucide="bell"></i>
+                                    <span class="ServerMenuLabel">Notification Settings</span>
+                                </div>
+                            </button>
+
+                            <button class="ServerMenuItem">
+                                <div class="ServerMenuContent">
+                                    <i data-lucide="shield"></i>
+                                    <span class="ServerMenuLabel">Privacy Settings</span>
+                                </div>
+                            </button>
+
+                            <hr class="MenuSeparator">
+
+                            <button class="ServerMenuItem">
+                                <div class="ServerMenuContent">
+                                    <i data-lucide="pencil"></i>
+                                    <span class="ServerMenuLabel">Edit Per-server Profile</span>
+                                </div>
+                            </button>
+
+                            <button class="ServerMenuItem">
+                                <div class="ServerMenuContent">
+                                    <i data-lucide="eye-off"></i>
+                                    <span class="ServerMenuLabel">Hide Muted Channels</span>
+                                </div>
+                                <div class="MenuCheckbox"></div>
+                            </button>
+
+                            <hr class="MenuSeparator">
+
+                            <button class="ServerMenuItem ServerMenuItem--destructive">
+                                <div class="ServerMenuContent">
+                                    <i data-lucide="log-out"></i>
+                                    <span class="ServerMenuLabel">Leave Server</span>
+                                </div>
+                            </button>
+
+                            <hr class="MenuSeparator">
+
+                            <button class="ServerMenuItem">
+                                <div class="ServerMenuContent">
+                                    <i data-lucide="info"></i>
+                                    <span class="ServerMenuLabel">Copy Server Info</span>
+                                </div>
+                                <i data-lucide="chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ChannelScrollArea">
+                <button class="SystemChannelButton"><p class="ChannelName"><i data-lucide="user-round-pen"></i><span>Channels & Roles</span></p></button>
+                <hr class="ChannelSeparator">
+
+                <button class="ChannelButton"><p class="ChannelName"><i data-lucide="book-bookmark"></i><span>Rules Not Categorized</span></p></button>
+                <button class="ChannelButton"><p class="ChannelName"><i data-lucide="megaphone"></i><span>Announcements Not Categorized</span></p></button>
+                <button class="ChannelButton"><p class="ChannelName"><i data-lucide="hash"></i><span>General Not Categorized</span></p></button>
+                <button class="ChannelButton"><p class="ChannelName"><i data-lucide="volume-2"></i><span>VC Not Categorized</span></p></button>
+
+                <details class="Category">
+                    <summary class="CategoryName">
+                        <i class="CategoryArrow CategoryArrow--right" data-lucide="chevron-right"></i>
+                        <i class="CategoryArrow CategoryArrow--down" data-lucide="chevron-down"></i>
+                        <span>Category</span>
+                    </summary>
+                    <button class="ChannelButton"><p class="ChannelName"><i data-lucide="book-bookmark"></i><span>Rules Categorized</span></p></button>
+                    <button class="ChannelButton"><p class="ChannelName"><i data-lucide="megaphone"></i><span>Announcements Categorized</span></p></button>
+                    <button class="ChannelButton"><p class="ChannelName"><i data-lucide="hash"></i><span>General Categorized</span></p></button>
+                </details>
+
+                <details class="Category">
+                    <summary class="CategoryName">
+                        <i class="CategoryArrow CategoryArrow--right" data-lucide="chevron-right"></i>
+                        <i class="CategoryArrow CategoryArrow--down" data-lucide="chevron-down"></i>
+                        <span>Category 2</span>
+                    </summary>
+                    <button class="ChannelButton"><p class="ChannelName"><i data-lucide="volume-2"></i><span>VC Categorized</span></p></button>
+                </details>
+            </div>
+
+            <!-- User Account Pill -->
+            <div class="UserAccountPill">
+                <div class="UserAvatar">
+                    <img class="UserPFP" src="../assets/Placeholder User Profile Picture.png" alt="User Profile Picture">
+                    <span class="UserStatus UserStatus--online"></span>
+                </div>
+                <div class="UserInfo">
+                    <span class="Username">Username</span>
+                    <span class="UserCustomStatus">Online 🚀</span>
+                </div>
+                <div class="UserControls">
+                    <button class="UserControlButton" title="Mute"><i data-lucide="mic"></i></button>
+                    <button class="UserControlButton" title="Deafen"><i data-lucide="headphones"></i></button>
+                    <button class="UserControlButton" title="User Settings"><i data-lucide="settings"></i></button>
+                </div>
             </div>
         </div>
+
+        <!-- Chat View -->
+        <div class="ChatView">
+            <div class="ChannelHeader">
+                <i class="ChannelIcon" data-lucide="book-bookmark"></i>
+                <p class="ChannelTitle">Rules Not Categorized</p>
+                <p class="ChannelDescription">Channel Description</p>
+            </div>
+
+            <div class="MessagesView">
+                <div class="MessagesContainer">
+                    <div class="Message Message--reply">
+                        <div class="MessageReply">
+                            <span class="ReplyCorner"></span>
+                            <img class="ReplyPFP" src="../assets/Placeholder User Profile Picture.png" alt="Replied Profile Picture">
+                            <span class="ReplyName">RepliedUser</span>
+                            <span class="ReplyText">Original message being replied to... 👍</span>
+                        </div>
+                        <div class="MessageMain">
+                            <img class="SenderPFP" src="../assets/Placeholder User Profile Picture.png" alt="Placeholder Profile Picture">
+                            <div class="MessageContent">
+                                <p class="MessageInfo"><span class="SenderName">Username</span> <span class="SentTime">24:00</span></p>
+                                <p class="MessageText">Message Text 🎉</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="MessageGroup">
+                        <div class="Message">
+                            <div class="MessageMain">
+                                <img class="SenderPFP" src="../assets/Placeholder User Profile Picture.png" alt="Placeholder Profile Picture">
+                                <div class="MessageContent">
+                                    <p class="MessageInfo"><span class="SenderName">Username</span> <span class="SentTime">24:00</span></p>
+                                    <p class="MessageText">First message text 🔥</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Message Message--consecutive">
+                            <span class="HoverTime">24:01</span>
+                            <p class="MessageText">Second message text</p>
+                        </div>
+                        <div class="Message Message--consecutive">
+                            <span class="HoverTime">24:01</span>
+                            <p class="MessageText">Third message text</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ChatBar">
+                <button class="ChatBarButton"><i data-lucide="plus"></i></button>
+                <input class="ChatInput" type="text" placeholder="Type a message...">
+                <button class="ChatBarButton"><i data-lucide="smile"></i></button>
+                <button class="ChatBarButton"><i data-lucide="sticker"></i></button>
+                <button class="ChatBarButton"><i data-lucide="send"></i></button>
+            </div>
+        </div>
+
+        <!-- Member List -->
+        <div class="MemberList">
+            <div class="MemberSearch">
+                <input class="MemberSearchInput" type="text" placeholder="Search members...">
+                <button class="MemberSearchButton"><i data-lucide="search"></i></button>
+            </div>
+
+            <div class="MemberScrollArea">
+                <div class="MemberCategory">
+                    <p class="MemberCategoryName">Online — 2</p>
+                    
+                    <div class="Member">
+                        <div class="MemberAvatar">
+                            <img class="MemberPFP" src="../assets/Placeholder User Profile Picture.png" alt="User Avatar">
+                            <span class="MemberStatus MemberStatus--online"></span>
+                        </div>
+                        <div class="MemberDetails">
+                            <p class="MemberName">Username</p>
+                            <p class="MemberCustomStatus">Playing a game... 🎮</p>
+                        </div>
+                    </div>
+
+                    <div class="Member">
+                        <div class="MemberAvatar">
+                            <img class="MemberPFP" src="../assets/Placeholder User Profile Picture.png" alt="User Avatar">
+                            <span class="MemberStatus MemberStatus--dnd"></span>
+                        </div>
+                        <div class="MemberDetails">
+                            <p class="MemberName">RepliedUser</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="MemberCategory">
+                    <p class="MemberCategoryName">Online — 2</p>
+                    
+                    <div class="Member">
+                        <div class="MemberAvatar">
+                            <img class="MemberPFP" src="../assets/Placeholder User Profile Picture.png" alt="User Avatar">
+                            <span class="MemberStatus MemberStatus--online"></span>
+                        </div>
+                        <div class="MemberDetails">
+                            <p class="MemberName">Username</p>
+                            <div class="ThoughtBubble ThoughtBubble--member">
+                                <i data-lucide="cloud"></i>
+                                <span>AFK eating lunch 🥪</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <script>
+            lucide.createIcons();
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+        <script>
+            twemoji.parse(document.body);
+        </script>
+
+        <script>
+            const serverMenuBtn = document.getElementById('serverMenuBtn');
+            const serverMenuDropdown = document.getElementById('serverMenuDropdown');
+
+            serverMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                serverMenuDropdown.classList.toggle('is-open');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!serverMenuDropdown.contains(e.target) && e.target !== serverMenuBtn) {
+                    serverMenuDropdown.classList.remove('is-open');
+                }
+            });
+        </script>
     </body>
 </html>

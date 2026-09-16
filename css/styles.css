@@ -1,0 +1,965 @@
+/* Core Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #dbdee1;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-color: #1e1f22;
+    overflow: hidden;
+}
+
+svg.lucide {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+    flex-shrink: 0;
+}
+
+/* Twemoji Image Sizing and Alignment */
+img.emoji {
+    height: 1.2em;
+    width: 1.2em;
+    margin: 0 0.1em;
+    vertical-align: -0.15em;
+    display: inline-block;
+}
+
+/* ==================== 1. SERVER SELECTOR ==================== */
+.ServerList {
+    width: 72px;
+    background-color: #1e1f22;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.ServerButton {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #313338;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.ServerButton:hover {
+    border-radius: 16px;
+    background-color: #5865f2;
+}
+
+.ServerButton img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    font-size: 0;
+}
+
+.ServerSeparator {
+    width: 32px;
+    height: 2px;
+    background-color: #35363c;
+    border: none;
+    margin: 4px 0;
+}
+
+/* ==================== 2. CHANNEL SELECTOR / DM SIDEBAR ==================== */
+.ChannelList {
+    width: 240px;
+    height: 100vh;
+    background-color: #2b2d31;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.ServerHeader {
+    position: relative;
+    width: 100%;
+    height: 135px;
+    overflow: visible;
+    border-bottom: 1px solid #1f2023;
+}
+
+.ServerBanner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    font-size: 0;
+}
+
+.ServerHeaderContent {
+    position: relative;
+    z-index: 2;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 100%);
+}
+
+.ServerName {
+    font-weight: 700;
+    font-size: 16px;
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.ServerActions {
+    display: flex;
+    gap: 8px;
+    position: relative;
+}
+
+.ActionButton {
+    background: rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ActionButton:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.ActionButton svg {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8));
+}
+
+.ChannelScrollArea {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.SystemChannelButton, 
+.ChannelButton {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 6px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    min-width: 0;
+}
+
+.ChannelButton:hover {
+    background-color: #35373c;
+}
+
+.ChannelName {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #949ba4;
+    min-width: 0;
+    width: 100%;
+}
+
+.ChannelName span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.ChannelSeparator {
+    border: none;
+    height: 1px;
+    background-color: #35363c;
+    margin: 8px 0;
+}
+
+/* Categories with Chevron Logic */
+.Category {
+    margin-top: 8px;
+}
+
+.CategoryName {
+    font-size: 12px;
+    font-weight: 700;
+    color: #949ba4;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+}
+
+.CategoryName::-webkit-details-marker {
+    display: none;
+}
+
+.CategoryArrow {
+    width: 14px;
+    height: 14px;
+}
+
+.CategoryArrow--down {
+    display: none;
+}
+
+details[open] .CategoryArrow--right {
+    display: none;
+}
+
+details[open] .CategoryArrow--down {
+    display: block;
+}
+
+/* User Account Pill (Pinned to Bottom) */
+.UserAccountPill {
+    height: 52px;
+    background-color: #232428;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+.UserAvatar {
+    position: relative;
+    width: 32px;
+    height: 32px;
+}
+
+.UserPFP {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    font-size: 0;
+}
+
+.UserInfo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+.Username {
+    font-size: 13px;
+    font-weight: 600;
+    color: #f2f3f5;
+}
+
+.UserCustomStatus {
+    font-size: 11px;
+    color: #949ba4;
+}
+
+.UserControls {
+    display: flex;
+    gap: 2px;
+}
+
+.UserControlButton {
+    background: transparent;
+    border: none;
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.UserControlButton:hover {
+    background-color: #35373c;
+}
+
+/* ==================== 3. MAIN CHAT VIEW ==================== */
+.ChatView {
+    flex: 1;
+    height: 100vh;
+    background-color: #313338;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.ChannelHeader {
+    height: 48px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #232428;
+}
+
+.ChannelTitle {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.ChannelDescription {
+    font-size: 12px;
+    color: #949ba4;
+}
+
+.MessagesView {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.MessagesContainer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.MessageGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.Message {
+    display: flex;
+    flex-direction: column;
+    padding: 2px 16px;
+    position: relative;
+}
+
+.Message:hover {
+    background-color: #2e3035;
+}
+
+.MessageMain {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.SenderPFP {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #2b2d31;
+    overflow: hidden;
+    font-size: 0;
+}
+
+.MessageContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.MessageInfo {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.SenderName {
+    font-weight: 600;
+    font-size: 15px;
+    color: #f2f3f5;
+}
+
+.SentTime {
+    font-size: 11px;
+    color: #949ba4;
+}
+
+.MessageText {
+    font-size: 14px;
+    color: #dbdee1;
+    line-height: 1.375rem;
+}
+
+.MessageReply {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 56px;
+    margin-bottom: 4px;
+    font-size: 12px;
+    color: #b5bac1;
+}
+
+.ReplyPFP {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #2b2d31;
+    overflow: hidden;
+    font-size: 0;
+}
+
+.ReplyName {
+    font-weight: 600;
+}
+
+.ReplyText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Message--consecutive {
+    padding-left: 72px;
+}
+
+.HoverTime {
+    position: absolute;
+    left: 16px;
+    font-size: 10px;
+    color: #949ba4;
+    display: none;
+}
+
+.Message--consecutive:hover .HoverTime {
+    display: block;
+}
+
+.ChatBar {
+    margin: 0 16px 24px 16px;
+    background-color: #383a40;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    height: 44px;
+    gap: 8px;
+}
+
+.ChatInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+.ChatBarButton {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* ==================== 4. MEMBER LIST ==================== */
+.MemberList {
+    width: 240px;
+    background-color: #2b2d31;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.MemberSearch {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #1e1f22;
+    margin: 8px;
+    border-radius: 4px;
+    gap: 8px;
+}
+
+.MemberSearchInput {
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 13px;
+}
+
+.MemberSearchButton {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+}
+
+.MemberScrollArea {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.MemberCategoryName {
+    font-size: 12px;
+    font-weight: 700;
+    color: #949ba4;
+    margin-bottom: 4px;
+    padding-left: 8px;
+}
+
+.Member {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.Member:hover {
+    background-color: #35373c;
+}
+
+.MemberAvatar {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+.MemberPFP {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    font-size: 0;
+}
+
+.MemberStatus, .UserStatus {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #2b2d31;
+    flex-shrink: 0;
+}
+
+.MemberStatus--online, .UserStatus--online { background-color: #23a55a; }
+.MemberStatus--dnd, .UserStatus--dnd { background-color: #f23f43; }
+.MemberStatus--offline, .UserStatus--offline { background-color: #80848e; }
+
+.MemberDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.MemberName {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.MemberCustomStatus {
+    font-size: 11px;
+    color: #949ba4;
+}
+
+.Member--offline {
+    opacity: 0.5;
+}
+
+/* ==================== 5. DM SIDEBAR STYLES ==================== */
+.DMHeader {
+    height: 48px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #1f2023;
+}
+
+.SectionName {
+    font-weight: 700;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.DMButton {
+    width: 100%;
+    min-height: 44px;
+    background: transparent;
+    border: none;
+    padding: 6px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    text-align: left;
+    min-width: 0;
+}
+
+.DMButton:hover {
+    background-color: #35373c;
+}
+
+.DMButton--active {
+    background-color: #404249;
+}
+
+.DMAvatar {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+.DMPFP {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.DMInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+}
+
+.DMUsername {
+    font-size: 14px;
+    font-weight: 500;
+    color: #f2f3f5;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.DMLastMessage {
+    font-size: 12px;
+    color: #949ba4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.inline-status {
+    position: relative;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: none;
+}
+
+/* ==================== 6. DM PROFILE PANEL ==================== */
+.DMProfilePanel {
+    display: flex;
+    flex-direction: column;
+    background-color: #232428;
+}
+
+.ProfileHeader {
+    position: relative;
+    height: 120px;
+}
+
+.ProfileBanner {
+    height: 60px;
+    background-color: #5865f2;
+}
+
+.ProfileAvatarContainer {
+    position: absolute;
+    top: 24px;
+    left: 16px;
+    width: 80px;
+    height: 80px;
+}
+
+.ProfilePFP {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 6px solid #232428;
+    object-fit: cover;
+}
+
+.ProfileStatus {
+    width: 16px;
+    height: 16px;
+    bottom: 4px;
+    right: 4px;
+    border-width: 3px;
+}
+
+.ProfileBody {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ProfileDisplayName {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.ProfileUsername {
+    font-size: 13px;
+    color: #949ba4;
+}
+
+.ProfileSectionTitle {
+    font-size: 12px;
+    font-weight: 700;
+    color: #b5bac1;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.ProfileBio {
+    font-size: 13px;
+    color: #dbdee1;
+}
+
+/* ==================== 7. THOUGHT BUBBLE SYSTEM ==================== */
+.ThoughtBubble {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #111214;
+    color: #dbdee1;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.ThoughtBubble span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ThoughtBubble svg {
+    width: 12px;
+    height: 12px;
+    stroke: #00a8fc;
+    flex-shrink: 0;
+}
+
+.ThoughtBubble--dm {
+    padding: 2px 8px;
+    border-radius: 10px;
+    background-color: #1e1f22;
+    border: 1px solid #35363c;
+    color: #949ba4;
+    font-size: 11px;
+    max-width: 120px;
+}
+
+.ThoughtBubble--member {
+    margin-top: 2px;
+    padding: 2px 6px;
+    background-color: #1e1f22;
+    border-radius: 8px;
+    font-size: 11px;
+    color: #949ba4;
+}
+
+.ThoughtBubble--profile {
+    position: absolute;
+    top: 28px;
+    left: 64px;
+    background-color: #232428;
+    border: 1px solid #35363c;
+    border-radius: 14px;
+    padding: 8px 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    max-width: 150px;
+    white-space: normal;
+    font-size: 12px;
+    color: #f2f3f5;
+}
+
+.ThoughtBubble--profile::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -6px;
+    width: 10px;
+    height: 10px;
+    background-color: #232428;
+    border-left: 1px solid #35363c;
+    border-bottom: 1px solid #35363c;
+    transform: rotate(45deg);
+}
+
+.ThoughtBubble--profile::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: -16px;
+    width: 8px;
+    height: 8px;
+    background-color: #232428;
+    border: 1px solid #35363c;
+    border-radius: 50%;
+}
+
+/* ==================== 8. SERVER DROPDOWN MENU ==================== */
+.ServerMenuDropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    width: 228px;
+    background-color: #111214;
+    border-radius: 8px;
+    padding: 6px;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+}
+
+.ServerMenuDropdown.is-open {
+    display: flex;
+}
+
+.ServerMenuItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    background: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: #dbdee1;
+    text-align: left;
+}
+
+.ServerMenuItem:hover {
+    background-color: #5865f2;
+    color: #ffffff;
+}
+
+.ServerMenuItem:hover .ServerMenuLabel,
+.ServerMenuItem:hover svg {
+    color: #ffffff;
+    stroke: #ffffff;
+}
+
+.ServerMenuContent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ServerMenuLabel {
+    font-size: 13px;
+    font-weight: 500;
+    color: #dbdee1;
+}
+
+.ServerTagBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background-color: #2b2d31;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #5865f2;
+}
+
+.ServerTagBadge svg {
+    width: 12px;
+    height: 12px;
+    stroke: #a855f7;
+}
+
+.ServerMenuItem--destructive {
+    color: #f23f43;
+}
+
+.ServerMenuItem--destructive .ServerMenuLabel,
+.ServerMenuItem--destructive svg {
+    color: #f23f43;
+    stroke: #f23f43;
+}
+
+.ServerMenuItem--destructive:hover {
+    background-color: #da373c;
+    color: #ffffff;
+}
+
+.ServerMenuItem--destructive:hover .ServerMenuLabel,
+.ServerMenuItem--destructive:hover svg {
+    color: #ffffff;
+    stroke: #ffffff;
+}
+
+.MenuCheckbox {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1px solid #80848e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MenuCheckbox--checked {
+    background-color: #5865f2;
+    border-color: #5865f2;
+}
+
+.MenuCheckbox--checked svg {
+    width: 12px;
+    height: 12px;
+    stroke: #ffffff;
+}
+
+.MenuSeparator {
+    height: 1px;
+    background-color: #2b2d31;
+    border: none;
+    margin: 4px 0;
+}
